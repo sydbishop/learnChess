@@ -1,0 +1,29 @@
+h1 {
+    text-align: center;
+  }
+  h3 {
+    text-align: center;
+  }
+  body {
+    background-color: #f8f4f1;
+  }
+  p {
+    text-align: center;
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  img {
+    width: 200px;
+    align-items: center;
+  }
+  /* Create three equal columns that floats next to each other */
+  .column {
+    float: left;
+    width: 33.33%;
+  }
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
