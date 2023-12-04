@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Chess Quiz</title>
+    <style>
+        body {
+            background-color: #fcf8f3;
+        }
+
+        .quiz {
+            margin-top: 8%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: rgb(229, 232, 201);
+        }
+
+        .question {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+        .selection {
+            font-size: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 20px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            position: fixed;
+            top: 40%;
+            left: 40%;
+        }
+
+        button {
+            margin-right: 75px;
+            margin-top: 25%;
+            font-size: 20px;
+            padding: 10px 20px;
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #score {
+            font-size: 30px;
+            color: darkslategray;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz">
+        <h1>Chess Quiz</h1>
+        <div class="question" id="ques"></div>
+        <div class="selection" id="selection"></div>
+        <button id="submit" onclick="checkAnswer()">Submit</button>
+        <div id="score"></div>
+        <script>
+            const questions = [
+                {
+                    q: "Which piece can move only diagonally on the board?",
+                    a: [
+                        { text: "Rook", isCorrect: false },
+                        { text: "Queen", isCorrect: false },
+                        { text: "Bishop", isCorrect: true },
+                        { text: "Knight", isCorrect: false }
+                    ]
+                },
+                {
+                    q: "What piece can jump over other pieces? ",
+                    a: [
+                        { text: "King", isCorrect: false },
+                        { text: "Knight", isCorrect: true },
+                        { text: "Pawn", isCorrect: false },
+                        { text: "Queen", isCorrect: false }
+                    ]
+                },
+                {
+                    q: "The knight moves in what letter shape?",
+                    a: [
+                        { text: "L", isCorrect: true },
+                        { text: "C", isCorrect: false },
+                        { text: "O", isCorrect: false },
+                        { text: "I", isCorrect: false }
+                    ]
+                },
+                {
+                    q: "What color moves first?",
+                    a: [
+                        { text: "White", isCorrect: true },
+                        { text: "Black", isCorrect: false },
+                        { text: "Red", isCorrect: false },
+                        { text: "Green", isCorrect: false }
+                    ]
+                },
+                {
+                    q: "What two pieces are involved in castling?",
+                    a: [
+                        { text: "Knight and Queen", isCorrect: false },
+                        { text: "Rook and Pawn", isCorrect: false },
+                        { text: "Bishop and King", isCorrect: false },
+                        { text: "King and Rook", isCorrect: true }
+                    ]
+                },
+                {
+                    q: "Which is the only piece that must deviate from its usual movement to capture a piece?",
+                    a: [
+                        { text: "Bishop", isCorrect: false },
+                        { text: "Pawn", isCorrect: true },
+                        { text: "King", isCorrect: false },
+                        { text: "Knight", isCorrect: false }
+                    ]
+                }
+            ]
+    
+            let currentQuestion = 0
+            let score = 0
+    
+            function showQuestion() {
+                const question = document.getElementById("ques")
+                const selection = document.getElementById("selection")
+    
+                question.textContent = questions[currentQuestion].q;
+                selection.innerHTML = ""
+    
+                for (let i = 0; i < questions[currentQuestion].a.length; i++) {
+                    const choices = document.createElement("div");
+                    const choice = document.createElement("input");
+                    const choiceLabel = document.createElement("label");
+    
+                    choice.type = "radio";
+                    choice.name = "answer";
+                    choice.value = i;
+    
+                    choiceLabel.textContent = questions[currentQuestion].a[i].text;
+                    choices.appendChild(choice);
+                    choices.appendChild(choiceLabel);
+                    selection.appendChild(choices);
+                }
+            }
+    
+            showQuestion();
+    
+            function showScore() {
+                const totalScore = document.getElementById("score")
+                totalScore.textContent = `You got ${score} out of ${questions.length} right!`
+            }
+    
+            function nextQuestion() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    document.getElementById("selection").remove()
+                    document.getElementById("ques").remove()
+                    document.getElementById("submit").remove()
+                    showScore();
+                }
+    
+            }
+    
+            function checkAnswer() {
+                const selectedAnswer = parseInt(document.querySelector('input[name="answer"]:checked').value);
+                if (questions[currentQuestion].a[selectedAnswer].isCorrect) {
+                    score++;
+                    nextQuestion();
+                } else {
+                    nextQuestion();
+                }
+    
+            }
+    
+        </script>
+    </div>
+
+</body>
+
+</html>
