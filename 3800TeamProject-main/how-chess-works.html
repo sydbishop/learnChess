@@ -8,6 +8,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto Serif' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Neuton' rel='stylesheet'>
     <link rel="stylesheet" type="text/css" href="chess-navbar.css">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <style>
       body {
         font-family: 'Roboto Serif';
@@ -32,6 +34,28 @@
 
       }
 
+      a{
+        text-decoration: none;
+
+      }
+
+      .video-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
+      }
+
+      .responsive-iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+      }
+
     .title-section {
         padding: 50px;
         text-align: center;
@@ -43,6 +67,7 @@
         max-width: 900px;
         margin: auto;
         background-color: #FCF8F3;
+        padding: 16px;
         padding-bottom: 80px;
       }
 
@@ -107,102 +132,105 @@
   
   <body>
 <!--Start Nav Bar-->
-<nav>
-  <div class="logo"><a href="index.html">Learn Chess</a></div>
-  <ul>
-      <li><a href="index.html">Home</a></li>
-      <li>
-          <a href="#">Explore</a>
-          <ul>
-              <li><a href="#">History of Chess </a></li>
-              <li><a href="evolution.html">How Chess Evolved </a></li>
-              <li><a href="future.html">The Future of Chess </a></li>
-              <li><a href="how-chess-works.html">How To Play</a></li>
-              <li><a href="quiz.html">Test Your Skills</a></li>
+<nav class="navbar sticky-top navbar-expand-lg" style="background-color: #ede5d3; color:#1E1B16">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="index.html" style="font-weight: 600;">Learn Chess</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Explore
+          </a>
+          <ul class="dropdown-menu" style="background-color: #F1EDE7; color:#1E1B16">
+            <li><a class="dropdown-item" href="history.html">History of Chess</a></li>
+                  <li><a class="dropdown-item" href="evolution.html">Evolution of Chess</a></li>
+            <li><a class="dropdown-item" href="future.html">Future of Chess</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="how-chess-works.html">How To Play</a></li>
+            <li><a class="dropdown-item" href="quiz.html">Test Your Knowledge</a></li>
           </ul>
-      </li>
-      <li>
-          <a href="about.html">About</a>
-          
-      </li>
-      </li>
-      <li><button onclick="document.getElementById('id01').style.display='block'">
-          Sign Up
-        </button></li>
-  </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+      </ul>
+        <button class="btn btn-primary" onclick="document.getElementById('id01').style.display='block'">Sign Up</button>
+    </div>
+  </div>
 </nav>
 
 <!-- The Modal (contains the Sign Up form) -->
 <div id="id01" class="modal">
-  <span
-    onclick="document.getElementById('id01').style.display='none'"
-    class="close"
-    title="Close Modal"
-    >times;</span
-  >
-  <form class="modal-content" action="/action_page.php">
-    <div class="container">
-      <h1>Sign Up</h1>
-      <p>Please fill in this form to create an account.</p>
-      <hr />
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" required />
 
-      <label for="psw"><b>Password</b></label>
-      <input
-        type="password"
-        placeholder="Enter Password"
-        name="psw"
-        required
-      />
+<form class="modal-content" action="/action_page.php">
+<div class="container">
+  <h1>Sign Up</h1>
+  <p>Please fill in this form to create an account.</p>
+  <hr />
+  <label for="email"><b>Email</b></label>
+  <input type="text" placeholder="Enter Email" name="email" required />
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input
-        type="password"
-        placeholder="Repeat Password"
-        name="psw-repeat"
-        required
-      />
+  <label for="psw"><b>Password</b></label>
+  <input
+    type="password"
+    placeholder="Enter Password"
+    name="psw"
+    required
+  />
 
-      <label>
-        <input
-          type="checkbox"
-          checked="checked"
-          name="remember"
-          style="margin-bottom: 15px"
-        />
-        Remember me
-      </label>
+  <label for="psw-repeat"><b>Repeat Password</b></label>
+  <input
+    type="password"
+    placeholder="Repeat Password"
+    name="psw-repeat"
+    required
+  />
 
-      <p>
-        By creating an account you agree to our
-        <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
-      </p>
+  <label>
+    <input
+      type="checkbox"
+      checked="checked"
+      name="remember"
+      style="margin-bottom: 15px"
+    />
+    Remember me
+  </label>
 
-      <div class="clearfix">
-        <button
-          type="button"
-          onclick="document.getElementById('id01').style.display='none'"
-          class="cancelbtn"
-        >
-          Cancel
-        </button>
-        <button type="submit" class="signup">Sign Up</button>
-      </div>
-    </div>
-  </form>
+  <p>
+    By creating an account you agree to our
+    <a href="#" style="color: dodgerblue">Terms & Privacy</a>.
+  </p>
+
+  <div class="clearfix">
+    <button
+      type="button"
+      onclick="document.getElementById('id01').style.display='none'"
+      class="cancelbtn"
+    >
+      Cancel
+    </button>
+    <button type="submit" class="signup">Sign Up</button>
+  </div>
+</div>
+</form>
 </div>
 
 <script>
-  // Get the modal
-  var modal = document.getElementById("id01");
+// Get the modal
+var modal = document.getElementById("id01");
 
-  // When the user clicks anywhere outside of the modal, close it
-  window.onclick = function (event) {
-    if (event.target == modal) {
-      modal.style.display = "none";
-    }
-  };
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function (event) {
+if (event.target == modal) {
+  modal.style.display = "none";
+}
+};
 </script>
 <!--End Nav Bar-->
 
@@ -233,16 +261,15 @@
     <!----Video Tutorial---->
     <p>Here is a brief overview tutorial about Chess:</p>
     <br>
-    <iframe
-      width="664"
-      height="374"
+    <div class="video-container">
+    <iframe class="responsive-iframe"
       src="https://www.youtube.com/embed/ej_fnsdsksA"
       title="How To Play Chess: Learn All The Rules Of The Royal Game"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
       allowfullscreen
       style="margin: 0 auto; display: block"
-    ></iframe>
+    ></iframe></div><br><br>
     
     <!----Step 1---->
     <h2><a id="step1">Step 1: How To Setup The Chessboard</a></h2><br>
@@ -454,5 +481,8 @@
       not work against any competitive opponent.
     </p>
   </div>
+
+  <!--Bootstrap-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
