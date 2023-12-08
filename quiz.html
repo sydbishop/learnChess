@@ -62,6 +62,10 @@
         <div class="selection" id="selection"></div>
         <button id="submit" onclick="checkAnswer()">Submit</button>
         <div id="score"></div>
+        <div>
+            <canvas id="answerChart"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script>
             const questions = [
                 {
@@ -161,6 +165,28 @@
                     document.getElementById("selection").remove()
                     document.getElementById("ques").remove()
                     document.getElementById("submit").remove()
+                    const ctx = document.getElementById('answerChart');
+                    const data = {
+                        labels: [
+                            'Correct',
+                            'Incorrect'
+                        ],
+                        datasets: [{
+                            label: 'Chess Quiz',
+                            data: [score, (6 - score)],
+                            backgroundColor: [
+                                'rgb(96,184,101)',
+                                'rgb(255, 99, 132)'
+
+                            ],
+                            hoverOffset: 4
+                        }]
+                    };
+
+                    new Chart(ctx, {
+                        type: 'doughnut',
+                        data: data,
+                    });
                     showScore();
                 }
     
